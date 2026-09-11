@@ -11,3 +11,4 @@ Author: **FlexiSign / DualBytes — Adrian Bega**
 - Health reporting, signed event intake, redacted telemetry, and protected
   participant-revocation control.
 - Immutable image deployment through a Cosign-verified GHCR digest.
+- Downloadable Linux/amd64 Docker image archive with SHA-256 checksum.

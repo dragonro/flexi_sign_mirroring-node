@@ -37,6 +37,21 @@ only. It does not contain the Mirroring Node application source code.
 7. Return to FlexiSign and verify the node. It becomes selectable for screen
    mirroring only after verification and a healthy heartbeat.
 
+For an offline or direct external download, use the
+`flexisign-mirroring-node-1.0.933-linux-amd64.tar` release asset. Verify it
+with `SHA256SUMS`, load it into Docker, and use the local image tag in the
+Compose environment:
+
+```sh
+shasum -a 256 -c SHA256SUMS
+docker load --input flexisign-mirroring-node-1.0.933-linux-amd64.tar
+export FLEXISIGN_MIRRORING_NODE_IMAGE='flexisign-mirroring-node:1.0.933'
+docker compose up -d
+```
+
+The immutable Cosign-verified GHCR digest remains the preferred production
+deployment reference when the node host has registry access.
+
 ## Deployment contract
 
 - Public HTTPS/WSS: TCP `443` through a TLS reverse proxy to host loopback
