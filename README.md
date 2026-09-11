@@ -11,7 +11,7 @@ Author: **FlexiSign / DualBytes — Adrian Bega**
 - Version: `1.0.933`
 - Protocol: `1`
 - Supported release architecture: `linux/amd64`
-- Container image: `ghcr.io/dragonro/flexy_sign/mirroring-node`
+- Container image: `ghcr.io/dragonro/flexi_sign_mirroring-node`
 - Base media server: LiveKit Server `v1.13.6`
 
 This public repository contains release documentation and deployment assets
@@ -29,7 +29,7 @@ only. It does not contain the Mirroring Node application source code.
 6. Start the node:
 
    ```sh
-   export FLEXISIGN_MIRRORING_NODE_IMAGE='ghcr.io/dragonro/flexy_sign/mirroring-node@sha256:<verified-digest>'
+   export FLEXISIGN_MIRRORING_NODE_IMAGE='ghcr.io/dragonro/flexi_sign_mirroring-node@sha256:<verified-digest>'
    docker pull "$FLEXISIGN_MIRRORING_NODE_IMAGE"
    docker compose up -d
    ```
