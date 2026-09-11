@@ -4,6 +4,8 @@ Public release documentation and deployment assets for the FlexiSign Mirroring
 Node. The node provides secure, UDP-first internet screen mirroring through a
 customer-operated Docker deployment.
 
+Author: **FlexiSign / DualBytes — Adrian Bega**
+
 ## Stable release
 
 - Version: `1.0.933`

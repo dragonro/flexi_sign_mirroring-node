@@ -1,3 +1,4 @@
+# FlexiSign / DualBytes — Author: Adrian Bega
 services:
   flexisign-mirroring-node:
     image: "${FLEXISIGN_MIRRORING_NODE_IMAGE:?Set the Cosign-verified immutable image reference}"

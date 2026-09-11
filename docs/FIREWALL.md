@@ -1,5 +1,7 @@
 # FlexiSign Mirroring Node firewall reference
 
+Author: **FlexiSign / DualBytes — Adrian Bega**
+
 Apply these rules on the cloud security group, router, and host firewall for a
 public FlexiSign Mirroring Node.
 

@@ -1,5 +1,7 @@
 # Changelog
 
+Author: **FlexiSign / DualBytes — Adrian Bega**
+
 ## 1.0.933 — stable
 
 - First stable public FlexiSign Mirroring Node release.
