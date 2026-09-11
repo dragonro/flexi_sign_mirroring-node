@@ -1,0 +1,14 @@
+services:
+  flexisign-mirroring-node:
+    image: "${FLEXISIGN_MIRRORING_NODE_IMAGE:?Set the Cosign-verified immutable image reference}"
+    restart: unless-stopped
+    environment:
+      FLEXISIGN_NODE_ID: "replace-with-node-id"
+      FLEXISIGN_BACKEND_URL: "https://console.example.com"
+      FLEXISIGN_NODE_API_TOKEN: "replace-with-one-time-node-api-token"
+      LIVEKIT_API_KEY: "replace-with-one-time-livekit-api-key"
+      LIVEKIT_API_SECRET: "replace-with-one-time-livekit-api-secret"
+    ports:
+      - "127.0.0.1:8080:8080/tcp"
+      - "7881:7881/tcp"
+      - "50000-60000:50000-60000/udp"
