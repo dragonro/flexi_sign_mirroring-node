@@ -4,12 +4,37 @@ services:
     image: "${FLEXISIGN_MIRRORING_NODE_IMAGE:?Set the Cosign-verified immutable image reference}"
     restart: unless-stopped
     environment:
-      FLEXISIGN_NODE_ID: "replace-with-node-id"
-      FLEXISIGN_BACKEND_URL: "https://console.example.com"
-      FLEXISIGN_NODE_API_TOKEN: "replace-with-one-time-node-api-token"
-      LIVEKIT_API_KEY: "replace-with-one-time-livekit-api-key"
-      LIVEKIT_API_SECRET: "replace-with-one-time-livekit-api-secret"
-    ports:
-      - "127.0.0.1:8080:8080/tcp"
-      - "7881:7881/tcp"
-      - "50000-60000:50000-60000/udp"
+      FLEXISIGN_NODE_ID: ${FLEXISIGN_NODE_ID:?Set the node ID}
+      FLEXISIGN_BACKEND_URL: ${FLEXISIGN_BACKEND_URL:?Set the FlexiSign backend URL}
+      FLEXISIGN_NODE_PUBLIC_HOST: ${FLEXISIGN_NODE_PUBLIC_HOST:?Set the Cloudflare Tunnel hostname}
+      FLEXISIGN_NODE_API_TOKEN: ${FLEXISIGN_NODE_API_TOKEN:?Set the one-time node API token}
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:?Set the one-time LiveKit API key}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:?Set the one-time LiveKit API secret}
+      FLEXISIGN_NODE_LISTEN_ADDR: ${FLEXISIGN_NODE_LISTEN_ADDR:-127.0.0.1:8080}
+      FLEXISIGN_LIVEKIT_PORT_RANGE_START: ${FLEXISIGN_LIVEKIT_PORT_RANGE_START:-52000}
+      FLEXISIGN_LIVEKIT_PORT_RANGE_END: ${FLEXISIGN_LIVEKIT_PORT_RANGE_END:-62000}
+    network_mode: host
+
+  cloudflared:
+    image: "cloudflare/cloudflared@sha256:ff69a2225ad7c6f85ed84fbd5f3087df46202426b2388ec60214098e0adf05e9"
+    restart: unless-stopped
+    depends_on:
+      flexisign-mirroring-node:
+        condition: service_started
+    network_mode: host
+    command:
+      - tunnel
+      - --no-autoupdate
+      - --metrics
+      - 127.0.0.1:20241
+      - run
+      - --url
+      - http://127.0.0.1:8080
+      - --token-file
+      - /run/secrets/cloudflare_tunnel_token
+    secrets:
+      - cloudflare_tunnel_token
+
+secrets:
+  cloudflare_tunnel_token:
+    environment: CLOUDFLARE_TUNNEL_TOKEN
